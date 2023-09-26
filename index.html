@@ -4,11 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>Document</title>
 </head>
 
 <body>
+    <header>
+        <span id="hiScoreSpan">View Highscores</span>
+        <span id="timer">Time: 0</span>
+    </header>
 
+    <main>
+        <section id="start-quiz">
+            <h1>Coding Quiz Challenges</h1>
+            <p>Try to answer all the questions within the time limit. Wrong answers will deduct time. Your final score is your time remaining.</p>
+        </section>
+
+        <section id="quiz">
+            <h2 id="question">question</h2>
+
+            <button id="b1" class="answer-btn" type="button">answer 1</button>
+            <button id="b2" class="answer-btn" type="button">answer 2</button>
+            <button id="b3" class="answer-btn" type="button">answer 3</button>
+            <button id="b4" class="answer-btn" type="button">answer 4</button>
+        </section>
+
+        <section id="highscores">
+            <h1>Highscores</h1>
+            <ul id="scores"></ul>
+        </section>
+    </main>
 </body>
+
+<script src="./assets/js/script.js"></script>
 
 </html>
