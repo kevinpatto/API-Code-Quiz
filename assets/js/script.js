@@ -1,0 +1,1 @@
+var viewScoresEl = document.querySelector("#hi-score-span");

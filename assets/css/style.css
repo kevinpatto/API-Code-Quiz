@@ -23,6 +23,12 @@ header {
     width: 100%;
 }
 
+header #view-score-span:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: purple;
+}
+
 /* main */
 main {
     flex-direction: column;
