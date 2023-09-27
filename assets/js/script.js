@@ -30,16 +30,20 @@ var restartBtnEl = document.querySelector("#restart-btn");
 var clearBtnEl = document.querySelector("#clear-scores-btn");
 
 // GENERAL FUNCTIONALITY VARIABLES
-var timeLeft = 0;
+var timeLeft = 90;
+var score = 0;
+var onQuestion = 0;
+
+var questions = [
+    ["answer is 3", 3],
+    ["answer is 1", 1],
+    ["answer is 4", 4],
+    ["answer is 3", 3],
+    ["answer is 2", 2]
+];
 
 // === FUNCTIONS SEPERATED BY SECTION ===
 // GENERAL FUNCTIONALITY
-function init() {
-    // initialize page
-    timerEl.textContent = "Time: " + timeLeft;
-    showStartQuiz();
-}
-
 function startQuiz() {
     // start timer
     timeLeft = 90;
@@ -53,18 +57,49 @@ function startQuiz() {
     var timerInterval = setInterval(function () {
         timeLeft--;
         timerEl.textContent = "Time: " + timeLeft;
-        if (timeLeft == 0) {
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
             stopQuiz();
         }
     }, 1000);
+
+    getNextQuestion();
 }
 
 function stopQuiz() {
-    // stop timer, show view highscores/hide timer, switch to enter initials section
-    clearInterval(timerInterval);
+    // show view highscores/hide timer, switch to enter initials section
+    score = timeLeft;
+    onQuestion = 0;
     viewScoresEl.setAttribute("style", "visibility: visible;");
     timerEl.setAttribute("style", "visibility: hidden;");
+    if (score >= 0) {
+        achievedScoreEl.textContent = score;
+    }
+    else {
+        achievedScoreEl.textContent = "0";
+    }
     showSection(enterInitialsSectionEl);
+}
+
+function getNextQuestion() {
+    questionTextEl.textContent = questions[onQuestion][0];
+}
+
+function answerQuestion(answer) {
+    if (answer == questions[onQuestion][1]) {
+        // add hb and "correct!" for a few seconds
+    } else {
+        // add hb and "incorrect" for a few seconds
+        timeLeft -= 20;
+        timerEl.textContent = "Time: " + timeLeft;
+    }
+
+    onQuestion++;
+    if (onQuestion >= questions.length) {
+        stopQuiz();
+    } else {
+        getNextQuestion();
+    }
 }
 
 function showSection(section) {
@@ -102,13 +137,32 @@ viewScoresEl.addEventListener("click", function () {
 startQuizBtnEl.addEventListener("click", startQuiz);
 
 // QUIZ FUNCTIONALITY
+// add event listeners to each button
+// for whatever god-forsaken reason, this does not work in a for loop
+answerBtnsEl[0].addEventListener("click", function () {
+    answerQuestion(1);
+    console.log(1);
+});
 
+answerBtnsEl[1].addEventListener("click", function () {
+    answerQuestion(2);
+    console.log(2);
+});
+
+answerBtnsEl[2].addEventListener("click", function () {
+    answerQuestion(3);
+    console.log(3);
+});
+
+answerBtnsEl[3].addEventListener("click", function () {
+    answerQuestion(4);
+    console.log(4);
+});
 
 // ENTER INITIALS FUNCTIONALITY
+
 
 // HIGHSCORES FUNCTIONALTY
 restartBtnEl.addEventListener("click", function () {
     showSection(startQuizSectionEl);
 })
-
-init(); // initialize page
