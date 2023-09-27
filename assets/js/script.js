@@ -1,5 +1,5 @@
 // variables spaced out by section
-var viewScoresEl = document.querySelector("#hi-score-span");
+var viewScoresEl = document.querySelector("#view-score-span");
 var timerEl = document.querySelector("#timer-span");
 
 var startQuizSectionEl = document.querySelector("#start-quiz");
@@ -22,3 +22,13 @@ var submitBtnEl = document.querySelector("#submit-btn");
 var highscoresSectionEl = document.querySelector("#highscores");
 var scoresLiEl = document.querySelector("#scores");
 
+// FUNCTIONS
+function showLeaderboard() {
+    startQuizSectionEl.setAttribute("style", "visibility: collapse;");
+    quizSectionEl.setAttribute("style", "visibility: collapse;");
+    enterScoreSectionEl.setAttribute("style", "visibility: collapse;");
+    highscoresSectionEl.setAttribute("style", "visibility: visible;");
+}
+
+// HEADER FUNCTIONALITY
+viewScoresEl.addEventListener("click", showLeaderboard);

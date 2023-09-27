@@ -39,12 +39,12 @@ main {
 main>section {
     min-width: 376px;
     max-width: 600px;
+    text-align: center;
 }
 
 /* start quiz section */
 main #start-quiz {
     visibility: visible;
-    text-align: center;
 }
 
 main #start-quiz #start-btn {
