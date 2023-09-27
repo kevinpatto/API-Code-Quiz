@@ -18,7 +18,7 @@ var answerBtnsEl = [
 ];
 
 // ENTER INITIALS SECTION
-var enterScoreSectionEl = document.querySelector("#enter-initials");
+var enterInitialsSectionEl = document.querySelector("#enter-initials");
 var achievedScoreEl = document.querySelector("#achieved-score-span");
 var inputEl = document.querySelector("#initials-input");
 var submitBtnEl = document.querySelector("#submit-btn");
@@ -26,20 +26,47 @@ var submitBtnEl = document.querySelector("#submit-btn");
 // HIGHSCORES SECTION
 var highscoresSectionEl = document.querySelector("#highscores");
 var scoresLiEl = document.querySelector("#scores");
+var restartBtnEl = document.querySelector("#restart-btn");
+var clearBtnEl = document.querySelector("#clear-scores-btn");
 
-// FUNCTIONALITY VARIABLES
-var timeLeft = 69;
+// GENERAL FUNCTIONALITY VARIABLES
+var timeLeft = 90;
 
-// FUNCTIONS
-function showLeaderboard() {
-    startQuizSectionEl.setAttribute("style", "visibility: collapse;");
-    quizSectionEl.setAttribute("style", "visibility: collapse;");
-    enterScoreSectionEl.setAttribute("style", "visibility: collapse;");
-    highscoresSectionEl.setAttribute("style", "visibility: visible;");
+// === FUNCTIONS SEPERATED BY SECTION ===
+// GENERAL FUNCTIONALITY
+function init() {
+    timerEl.textContent = "Time: " + timeLeft;
+    showStartQuiz();
+}
+
+function showSection(section) {
+    if (section === startQuizSectionEl) {
+        startQuizSectionEl.setAttribute("style", "visibility: visible;");
+    } else {
+        startQuizSectionEl.setAttribute("style", "visibility: collapse;");
+    }
+
+    if (section === quizSectionEl) {
+        quizSectionEl.setAttribute("style", "visibility: visible;");
+    } else {
+        quizSectionEl.setAttribute("style", "visibility: collapse;");
+    }
+
+    if (section === enterInitialsSectionEl) {
+        enterInitialsSectionEl.setAttribute("style", "visibility: visible;");
+    } else {
+        enterInitialsSectionEl.setAttribute("style", "visibility: collapse;");
+    }
+
+    if (section === highscoresSectionEl) {
+        highscoresSectionEl.setAttribute("style", "visibility: visible;");
+    } else {
+        highscoresSectionEl.setAttribute("style", "visibility: collapse;");
+    }
 }
 
 // HEADER FUNCTIONALITY
-viewScoresEl.addEventListener("click", showLeaderboard);
+viewScoresEl.addEventListener("click", showSection(highscoresSectionEl));
 var timerInterval = setInterval(function () {
     timeLeft--;
     timerEl.textContent = "Time: " + timeLeft;
@@ -47,3 +74,7 @@ var timerInterval = setInterval(function () {
         clearInterval(timerInterval);
     }
 }, 1000);
+
+// START QUIZ SECTION FUNCTIONALITY
+
+init();
