@@ -64,7 +64,7 @@ main #quiz .answer-btn {
 }
 
 /* enter score section */
-main #enter-score {
+main #enter-initials {
     visibility: collapse;
 }
 
