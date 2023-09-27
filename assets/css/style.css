@@ -41,11 +41,19 @@ main>section {
     max-width: 600px;
 }
 
+/* start quiz section */
 main #start-quiz {
     visibility: visible;
     text-align: center;
 }
 
+main #start-quiz #start-btn {
+    font-size: 125%;
+    background-color: purple;
+    color: white;
+}
+
+/* quiz section */
 main #quiz {
     visibility: collapse;
 }
@@ -55,6 +63,12 @@ main #quiz .answer-btn {
     margin: 12px 8px;
 }
 
+/* enter score section */
+main #enter-score {
+    visibility: collapse;
+}
+
+/* highscores section */
 main #highscores {
     visibility: collapse;
 }
