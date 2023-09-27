@@ -29,6 +29,10 @@ header #view-score-span:hover {
     color: purple;
 }
 
+header #timer-span {
+    visibility: hidden;
+}
+
 /* main */
 main {
     flex-direction: column;

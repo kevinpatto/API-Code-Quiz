@@ -30,13 +30,41 @@ var restartBtnEl = document.querySelector("#restart-btn");
 var clearBtnEl = document.querySelector("#clear-scores-btn");
 
 // GENERAL FUNCTIONALITY VARIABLES
-var timeLeft = 90;
+var timeLeft = 0;
 
 // === FUNCTIONS SEPERATED BY SECTION ===
 // GENERAL FUNCTIONALITY
 function init() {
+    // initialize page
     timerEl.textContent = "Time: " + timeLeft;
     showStartQuiz();
+}
+
+function startQuiz() {
+    // start timer
+    timeLeft = 90;
+    timerEl.textContent = "Time: " + timeLeft;
+
+    // hide view highscores, show timer
+    viewScoresEl.setAttribute("style", "visibility: hidden;");
+    timerEl.setAttribute("style", "visibility: visible;");
+
+    showSection(quizSectionEl);
+    var timerInterval = setInterval(function () {
+        timeLeft--;
+        timerEl.textContent = "Time: " + timeLeft;
+        if (timeLeft == 0) {
+            stopQuiz();
+        }
+    }, 1000);
+}
+
+function stopQuiz() {
+    // stop timer, show view highscores/hide timer, switch to enter initials section
+    clearInterval(timerInterval);
+    viewScoresEl.setAttribute("style", "visibility: visible;");
+    timerEl.setAttribute("style", "visibility: hidden;");
+    showSection(enterInitialsSectionEl);
 }
 
 function showSection(section) {
@@ -66,15 +94,21 @@ function showSection(section) {
 }
 
 // HEADER FUNCTIONALITY
-viewScoresEl.addEventListener("click", showSection(highscoresSectionEl));
-var timerInterval = setInterval(function () {
-    timeLeft--;
-    timerEl.textContent = "Time: " + timeLeft;
-    if (timeLeft == 0) {
-        clearInterval(timerInterval);
-    }
-}, 1000);
+viewScoresEl.addEventListener("click", function () {
+    showSection(highscoresSectionEl);
+});
 
 // START QUIZ SECTION FUNCTIONALITY
+startQuizBtnEl.addEventListener("click", startQuiz);
 
-init();
+// QUIZ FUNCTIONALITY
+
+
+// ENTER INITIALS FUNCTIONALITY
+
+// HIGHSCORES FUNCTIONALTY
+restartBtnEl.addEventListener("click", function () {
+    showSection(startQuizSectionEl);
+})
+
+init(); // initialize page
