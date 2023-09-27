@@ -33,6 +33,7 @@ var clearBtnEl = document.querySelector("#clear-scores-btn");
 var timeLeft = 90;
 var score = 0;
 var onQuestion = 0;
+var timerInterval;
 
 var questions = [
     ["answer is 3", 3],
@@ -54,13 +55,14 @@ function startQuiz() {
     timerEl.setAttribute("style", "visibility: visible;");
 
     showSection(quizSectionEl);
-    var timerInterval = setInterval(function () {
+    timerInterval = setInterval(function () {
         timeLeft--;
         timerEl.textContent = "Time: " + timeLeft;
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
             stopQuiz();
         }
+        // console.log("timer is running with value of " + timeLeft);
     }, 1000);
 
     getNextQuestion();
@@ -70,6 +72,7 @@ function stopQuiz() {
     // show view highscores/hide timer, switch to enter initials section
     score = timeLeft;
     onQuestion = 0;
+    clearInterval(timerInterval);
     viewScoresEl.setAttribute("style", "visibility: visible;");
     timerEl.setAttribute("style", "visibility: hidden;");
     if (score >= 0) {
@@ -160,9 +163,39 @@ answerBtnsEl[3].addEventListener("click", function () {
 });
 
 // ENTER INITIALS FUNCTIONALITY
-
+submitBtnEl.addEventListener("click", function () {
+    if (inputEl.value.length != 2) {
+        inputEl.value = "";
+        alert("Please enter at only two characters");
+    } else {
+        var listEl = document.createElement("li");
+        console.log(typeof inputEl.value);
+        listEl.textContent = inputEl.value.toUpperCase();
+        scoresLiEl.append(listEl);
+        localStorage.setItem(localStorage.length, inputEl.value);
+        inputEl.value = "";
+        showSection(highscoresSectionEl);
+    }
+});
 
 // HIGHSCORES FUNCTIONALTY
 restartBtnEl.addEventListener("click", function () {
     showSection(startQuizSectionEl);
-})
+});
+
+clearBtnEl.addEventListener("click", function () {
+    var listElArray = scoresLiEl.querySelectorAll("li");
+    for (i = 0; i < listElArray.length; i++) {
+        listElArray[i].remove();
+    }
+    localStorage.clear();
+});
+
+for (i = 0; i < localStorage.length; i++) {
+    if (localStorage.length === 0) {
+        break;
+    }
+    var listEl = document.createElement("li");
+    listEl.textContent = localStorage.getItem(i);
+    scoresLiEl.append(listEl);
+}

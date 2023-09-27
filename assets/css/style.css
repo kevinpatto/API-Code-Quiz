@@ -76,3 +76,7 @@ main #enter-initials {
 main #highscores {
     visibility: collapse;
 }
+
+main #highscores #scores {
+    min-height: 25vh;
+}
